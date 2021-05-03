@@ -25,9 +25,11 @@ class TreeNode  {
                 $rightTrees = [System.Collections.ArrayList]::New()
                 $rightTrees.Add($this.fulltreesWithNLeaves($rightLeaves))
                 foreach ($left in $leftTrees){
-                    Write-host $this.visualization($this.leftCounter)
+                    Write-Host $this.visualization($this.leftCounter)
+                    #Write-Host $this.visualization($this.leftCounter, "yes")
                     foreach ($right in $rightTrees){
                         Write-host $this.visualization($this.rightCounter)
+                        #Write-Host $this.visualization($this.rightCounter, "yes")
                         $root = [TreeNode]::New()
                         $root.left = $this.left
                         $root.right = $this.right
@@ -42,9 +44,22 @@ class TreeNode  {
     }
 
     [String] visualization($number){
+        $this.print = $this.addingChars($number)
+        return $this.print   
+    }
+
+    [String] visualization($number, $Exponential){
         for($i = 1;$i -le $number;$i++){
             $this.print = $this.print + "-"
         }
-        return $this.print        
+        return $this.print    
+    }
+
+    [String] addingChars($number){
+        $string = ""
+        for($i = 1;$i -le $number;$i++){
+            $string += "-"
+        } 
+        return $string
     }
 }
